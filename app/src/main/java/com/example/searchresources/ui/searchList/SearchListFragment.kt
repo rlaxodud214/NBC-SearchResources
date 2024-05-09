@@ -34,6 +34,7 @@ class SearchListFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentSearchListBinding.inflate(inflater, container, false)
+        loadData()
 
         return binding.root
     }
@@ -56,6 +57,8 @@ class SearchListFragment : Fragment() {
                         searchListAdapter.submitList(convertItems(data))
                     }
                 }
+
+                saveData()
 
                 // 키보드 내리기
                 val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -92,6 +95,26 @@ class SearchListFragment : Fragment() {
         // 결과 출력
         Log.d("convert", formattedString)
         return formattedString
+    }
+
+    private fun saveData() {
+        val pref = activity.let {
+            it!!.getSharedPreferences("data", Context.MODE_PRIVATE) // 0
+        }
+
+        val edit = pref.edit()
+
+        edit.putString("name", binding.etKeyword.text.toString())
+        edit.apply()
+    }
+
+    private fun loadData() {
+        val pref = activity.let {
+            it!!.getSharedPreferences("data", 0)
+        }
+
+        val name = pref.getString("name", "")!!
+        binding.etKeyword.setText(name)
     }
 
 
