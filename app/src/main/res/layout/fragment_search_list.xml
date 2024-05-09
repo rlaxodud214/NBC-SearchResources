@@ -10,6 +10,49 @@
     android:padding="16dp"
     tools:context=".ui.searchList.SearchListFragment">
 
-    
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DADADA"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/et_keyword"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/shape_round"
+            android:backgroundTint="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_search"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:background="@drawable/shape_round"
+            android:backgroundTint="#008CFF"
+            android:text="검색"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="12dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:listitem="@layout/item_searchimage"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
