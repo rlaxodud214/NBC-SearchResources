@@ -1,6 +1,7 @@
 package com.example.searchresources.ui.searchList
 
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.example.searchresources.data.model.SearchImageResponse
 import com.example.searchresources.databinding.FragmentSearchListBinding
 import com.example.searchresources.domain.model.toEntity
 import com.example.searchresources.network.RetrofitClient
+import com.example.searchresources.ui.util.GridSpacingItemDecoration
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,6 +46,9 @@ class SearchListFragment : Fragment() {
 
         with(binding) {
             rvSearchItem.adapter = searchListAdapter
+            rvSearchItem.addItemDecoration(
+                GridSpacingItemDecoration(2, 4f.fromDpToPx())
+            )
 
             btnSearch.setOnClickListener {
                 val keyword = etKeyword.text.toString()
@@ -66,6 +71,9 @@ class SearchListFragment : Fragment() {
             }
         }
     }
+
+    private fun Float.fromDpToPx(): Int =
+        (this * Resources.getSystem().displayMetrics.density).toInt()
 
     private fun convertItems(data : SearchImageResponse): List<SearchListItem> {
         val documents = data.toEntity().documents ?: return emptyList()
