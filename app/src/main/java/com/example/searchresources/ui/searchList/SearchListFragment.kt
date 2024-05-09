@@ -1,22 +1,21 @@
-package com.example.searchresources
+package com.example.searchresources.ui.searchList
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.example.searchresources.databinding.FragmentFirstBinding
+import androidx.fragment.app.Fragment
+import com.example.searchresources.databinding.FragmentSearchListBinding
 
-class FirstFragment : Fragment() {
-    private var _binding: FragmentFirstBinding? = null
+class SearchListFragment : Fragment() {
+    private var _binding: FragmentSearchListBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchListBinding.inflate(inflater, container, false)
 
         return binding.root
     }
