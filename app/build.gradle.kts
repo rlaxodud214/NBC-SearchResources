@@ -1,3 +1,10 @@
+import java.io.FileInputStream
+import java.util.Properties
+
+val properties = Properties().apply {
+    load(FileInputStream(rootProject.file("local.properties")))
+}
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -15,6 +22,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "KAKAO_API_URL", properties.getProperty("KAKAO_API_URL"))
+        buildConfigField("String", "KAKAO_API_KEY", properties.getProperty("KAKAO_API_KEY"))
     }
 
     buildTypes {
@@ -35,6 +45,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -49,4 +60,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("com.github.bumptech.glide:glide:4.13.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.13.0")
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 }
