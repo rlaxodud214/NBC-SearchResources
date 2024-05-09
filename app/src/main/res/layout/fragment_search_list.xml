@@ -27,7 +27,8 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginRight="8dp"
-            android:background="@drawable/shape_round"
+            android:paddingStart="8dp"
+            android:background="@drawable/shape_round4"
             android:backgroundTint="@color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -35,7 +36,7 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="32dp"
-            android:background="@drawable/shape_round"
+            android:background="@drawable/shape_round4"
             android:backgroundTint="#008CFF"
             android:text="검색"
             android:textColor="@color/white"

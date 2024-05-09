@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,32 +8,44 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
+    <ImageView
+        android:id="@+id/iv_thumbnail_image"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        app:cardCornerRadius="16dp">
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@tools:sample/avatars" />
 
-        <ImageView
-            android:id="@+id/iv_thumbnail_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            tools:background="@tools:sample/avatars" />
-    </androidx.cardview.widget.CardView>
+    <ImageView
+        android:id="@+id/iv_mark"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_mark_fill"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_thumbnail_image"
+        app:layout_constraintEnd_toEndOf="@+id/iv_thumbnail_image" />
 
     <TextView
         android:id="@+id/tv_display_sitename"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="4dp"
         android:text="sitename"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_thumbnail_image" />
 
     <TextView
         android:id="@+id/tv_datetime"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="4dp"
-        android:text="datetime"/>
+        android:text="datetime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_display_sitename" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,11 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.core.app.SharedElementCallback
 import androidx.fragment.app.Fragment
 import com.example.searchresources.data.model.SearchImageResponse
 import com.example.searchresources.databinding.FragmentSearchListBinding
 import com.example.searchresources.domain.model.toEntity
 import com.example.searchresources.network.RetrofitClient
+import com.example.searchresources.ui.MainActivity.Companion.selectedSearchImageList
 import com.example.searchresources.ui.util.GridSpacingItemDecoration
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,8 +30,26 @@ class SearchListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val searchListAdapter: SearchListAdapter by lazy {
-        SearchListAdapter()
+        SearchListAdapter() { position ->
+            if (!searchListItems[position].marked) {
+                selectedSearchImageList.add(searchListItems[position])
+            } else {
+                selectedSearchImageList.remove(searchListItems[position])
+            }
+
+            searchListItems[position] = searchListItems[position].let {
+                it.copy(
+                    marked = !it.marked
+                )
+            }
+            searchListAdapter.notifyItemChanged(position)
+
+            // Log.d("Test", searchListItems[position].marked.toString())
+            // Log.d("Test", selectedSearchImageList.toString())
+        }
     }
+
+    private lateinit var searchListItems: MutableList<SearchListItem>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +79,8 @@ class SearchListFragment : Fragment() {
                     Log.d("API TEST", data.toString())
 
                     withContext(Dispatchers.Main) {
-                        searchListAdapter.submitList(convertItems(data))
+                        searchListItems = convertItems(data).toMutableList()
+                        searchListAdapter.submitList(searchListItems)
                     }
                 }
 
