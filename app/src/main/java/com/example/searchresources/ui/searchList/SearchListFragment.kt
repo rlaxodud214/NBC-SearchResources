@@ -1,14 +1,12 @@
 package com.example.searchresources.ui.searchList
 
 import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.example.searchresources.data.model.SearchImageResponse
 import com.example.searchresources.databinding.FragmentSearchListBinding
@@ -18,6 +16,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 
 class SearchListFragment : Fragment() {
@@ -64,14 +65,35 @@ class SearchListFragment : Fragment() {
     }
 
     private fun convertItems(data : SearchImageResponse): List<SearchListItem> {
-        return data.toEntity().documents?.map {
+        val documents = data.toEntity().documents ?: return emptyList()
+
+        return documents.map {
             SearchListItem(
                 thumbnail = it.thumbnail_url,
                 site = it.display_sitename,
-                datetime = it.datetime,
+                datetime = convertDatetime(it.datetime!!),
             )
         }!!
     }
+
+    private fun convertDatetime(datetime: String): String {
+        // 원래 문자열을 ZonedDateTime으로 파싱
+        val zonedDateTime = ZonedDateTime.parse(datetime)
+
+        // LocalDateTime으로 변환
+        val localDateTime = zonedDateTime.toLocalDateTime()
+
+        // 원하는 출력 포맷 정의
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+
+        // 포맷 적용 후 문자열로 변환
+        val formattedString = localDateTime.format(formatter)
+
+        // 결과 출력
+        Log.d("convert", formattedString)
+        return formattedString
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
