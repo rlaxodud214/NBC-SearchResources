@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.searchresources.R
 import com.example.searchresources.databinding.ItemSearchimageBinding
 
 // ref: https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback
@@ -32,6 +33,7 @@ class SearchListAdapter() : ListAdapter<SearchListItem, SearchListAdapter.ViewHo
         fun onBind(searchListItem: SearchListItem) = with(binding) {
             Glide.with(binding.root)
                 .load(searchListItem.thumbnail)
+                .placeholder(R.drawable.ic_launcher_background)
                 .into(ivThumbnailImage)
 
             tvDisplaySitename.text = searchListItem.site
