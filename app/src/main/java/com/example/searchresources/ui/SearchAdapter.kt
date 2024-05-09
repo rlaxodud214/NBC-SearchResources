@@ -1,6 +1,5 @@
-package com.example.searchresources.ui.searchList
+package com.example.searchresources.ui
 
-import android.content.DialogInterface.OnClickListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.searchresources.R
 import com.example.searchresources.databinding.ItemSearchimageBinding
+import com.example.searchresources.ui.searchList.SearchListItem
 
 // ref: https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback
-class SearchListAdapter(
+class SearchAdapter(
     private val onClick: (Int) -> Unit
-) : ListAdapter<SearchListItem, SearchListAdapter.ViewHolder>(
+) : ListAdapter<SearchListItem, SearchAdapter.ViewHolder>(
     object : DiffUtil.ItemCallback<SearchListItem>() {
         // 현재 리스트에 노출하고 있는 아이템과 새로운 아이템이 서로 같은지 비교
         // 권장 사항 : Item의 파라미터에 고유한 ID 값이 있는 경우, 이 메서드는 ID를 기준으로 동일성을 반환 해야함
