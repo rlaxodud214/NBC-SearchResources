@@ -8,8 +8,8 @@ ___
 - UI는 fragment 2개를 사용합니다.(버튼이나 탭 선택 시 전환)
 
 ### 1. MainActivity 
-- [ ] Fragment를 보여줄 FrameLayout을 만들고, 하단에 2개의 버튼(이미지 검색, 내보관함) 을 생성합니다.
-- [ ] MainActivity 시작시 이미지 검색 fragment를 초기화면에 설정합니다.
+- [x] Fragment를 보여줄 FrameLayout을 만들고, 하단에 2개의 버튼(이미지 검색, 내보관함) 을 생성합니다.
+- [x] MainActivity 시작시 이미지 검색 fragment를 초기화면에 설정합니다.
 
 ___
 

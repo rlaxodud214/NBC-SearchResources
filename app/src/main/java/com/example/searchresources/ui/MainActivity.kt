@@ -1,15 +1,9 @@
-package com.example.searchresources
+package com.example.searchresources.ui
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import com.example.searchresources.databinding.ActivityMainBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {
@@ -20,6 +14,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        initTab()
+    }
 
+    private fun initTab() = with(binding) {
+        val names = listOf("이미지 검색", "내 보관함")
+
+        vpMain.adapter = ViewPagerAdapter(this@MainActivity)
+
+        TabLayoutMediator(tlMain, vpMain) { tab, position ->
+            tab.text = names[position]
+        }.attach()
     }
 }
